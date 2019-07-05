@@ -1,0 +1,44 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'fluxCrud'
+    version = '1.0'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+
+    compile('org.springframework.boot:spring-boot-starter-webflux')
+    compile('org.springframework.boot:spring-boot-starter-data-redis-reactive')
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
+    testCompile group: 'org.springframework.cloud', name: 'spring-cloud-dependencies', version: 'Finchley.RELEASE', ext: 'pom'
+    testCompile('org.springframework.cloud:spring-cloud-dependencies')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('io.projectreactor:reactor-test')
+    testCompile group: 'org.springframework.cloud', name: 'spring-cloud-starter-parent', version: 'Finchley.RELEASE', ext: 'pom'
+    testCompile group: 'com.playtika.testcontainers', name: 'embedded-redis', version: '1.12'
+    testCompile group: 'io.projectreactor', name: 'reactor-test', version: '3.2.5.RELEASE'
+    testCompile group: 'junit', name: 'junit'
+
+
+}
