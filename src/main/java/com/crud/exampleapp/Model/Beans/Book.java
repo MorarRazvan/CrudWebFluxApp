@@ -2,50 +2,23 @@ package com.crud.exampleapp.Model.Beans;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @RedisHash("books")
 public class Book {
-
-    public Book(String title, String genre, Set<String> authors) {
-        this.title = title;
-        this.genre = genre;
-        this.authors = authors;
-    }
-
     @Id
+    @NotBlank
     private String title;
+    @NotBlank
     private String genre;
-
-    public Set<String> getAuthors() {
-        return authors;
-    }
-
-    private Set<String> authors;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public void addAuthor(String author) {
-        authors.add(author);
-    }
-
-    public void removeAuthor(String author) {
-        authors.remove(author);
-    }
-
+    private Set<String> authors = new HashSet<>();
 }
