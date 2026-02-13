@@ -1,50 +1,23 @@
 package com.crud.exampleapp.Model.Beans;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-@RedisHash("authros")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@RedisHash("authors")
 public class Author {
-
-    private String name;
-
-    public Set<String> getBooks() {
-        return books;
-    }
-
-    private Set<String> books;
+    @Id
     private String id;
-
-    public String getId() {
-        return id;
-    }
-
-    public Author(String id, String name, Set<String> books) {
-        this.name = name;
-        this.books = books;
-        this.id = id;
-    }
-
-    public Author() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void addBook(String book) {
-        books.add(book);
-    }
-
-    public void removeBook(String book) {
-        books.remove(book);
-    }
-
-
+    @NotBlank
+    private String name;
+    private Set<String> books = new HashSet<>();
 }
