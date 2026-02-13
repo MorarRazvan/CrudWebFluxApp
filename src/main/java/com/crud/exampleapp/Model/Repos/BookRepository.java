@@ -1,15 +1,9 @@
 package com.crud.exampleapp.Model.Repos;
 
-
 import com.crud.exampleapp.Model.Beans.Book;
-import reactor.core.publisher.Mono;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import reactor.core.publisher.Flux;
 
-
-public interface BookRepository {
-
-    Mono<Book> save(Book book);
-
-    Mono<Book> findById(String id);
-
-    Mono<String> delete(String id);
+public interface BookRepository extends ReactiveCrudRepository<Book, String> {
+    Flux<Book> findByGenreContaining(String genre);
 }
